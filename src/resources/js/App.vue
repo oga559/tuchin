@@ -1,18 +1,15 @@
 <template>
-  <div>{{ hello }}</div>
+  <div>a</div>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
-export default {
-  setup() {
-      const hello = ref(
-          "Hello From TypeScript"
-      )
+import moment from "moment";
 
-      return {
-          hello
-      }
-  },
+export default {
+  mounted(){
+    let date = moment().startOf("month");
+    const youbiNum = date.day();
+    console.log(youbiNum)
+  }
 };
 </script>
