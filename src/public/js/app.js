@@ -17445,29 +17445,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  getCalendar: function getCalendar() {
-    var startDate = this.getStartDate();
-    var endDate = this.getEndDate();
-    var weekNumber = Math.ceil(endDate.diff(startDate, "days") / 7);
-    var calendars = [];
-
-    for (var week = 0; week < weekNumber; week++) {
-      var weekRow = [];
-
-      for (var day = 0; day < 7; day++) {
-        weekRow.push({
-          date: startDate.get("date")
-        });
-        startDate.add(1, "days");
-      }
-
-      calendars.push(weekRow);
+  data: function data() {
+    return {
+      currentDate: moment__WEBPACK_IMPORTED_MODULE_0___default()()
+    };
+  },
+  methods: {
+    getStartDate: function getStartDate() {
+      var date = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.currentDate);
+      date.startOf("month");
+      var youbiNum = date.day();
+      return date.subtract(youbiNum, "days");
+    },
+    getEndDate: function getEndDate() {
+      var date = moment__WEBPACK_IMPORTED_MODULE_0___default()(this.currentDate);
+      date.endOf("month");
+      var youbiNum = date.day();
+      return date.add(6 - youbiNum, "days");
     }
-
-    return calendars;
   },
   mounted: function mounted() {
-    console.log(this.getCalendar());
+    console.log(this.getStartDate());
+    console.log(this.getEndDate());
   }
 });
 
